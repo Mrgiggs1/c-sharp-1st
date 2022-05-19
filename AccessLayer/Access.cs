@@ -7,11 +7,12 @@ namespace AccessLayer
         public static void readData(string searching, SqlConnection con)
         {
             //create query that reads from database
-            string sql2 = "select * " +
-                "from member " +
-                "where FirstName like @search " +
-                "OR Surname like @search " +
-                "OR SAIdentityNo like @search ";
+            string sql2 = "select * from Member "+
+                            "inner join Department On Member.DepartmentId = Department.Id "+
+                            "inner join Position on Member.PositionId = Position.Id " +
+                            "where FirstName like @search " +
+                            "OR Surname like @search " +
+                            "OR SAIdentityNo like @search ";
             //create a sql command referencing the connection
             var cmd2 = new SqlCommand(sql2, con);
 
@@ -26,34 +27,38 @@ namespace AccessLayer
             
 
             int counting = 0;
-            //while its reading
-            Console.WriteLine("\nNo. \t|Fist Name \t |Surname \t| SA ID#");
+            
+            Console.WriteLine("\nNo. \t|Fist Name \t|Surname \t|SA ID# \t Department Name");
+            Console.WriteLine("===================================" +
+                "=======================================");
             while (dataReader.Read())
             {
-                //store the columns in variables
+                
                 var id = dataReader["Id"];
                 var name = dataReader["FirstName"];
                 var Surname = dataReader["Surname"];
                 var idno = dataReader["SAIdentityNo"];
+                var depName = dataReader["DepartmentName"];
 
                 if (dataReader.FieldCount <= 0)
                 {
-                    Console.WriteLine("Data not Found ## ");
+                    Console.WriteLine("No Data Found ## ");
                 }
                 else
                 {
-                    counting++;                    
-                    Console.WriteLine(counting+" \t| "+name+" \t|"+Surname+" \t| "+ idno);
+                    counting++;
+                    
+                    Console.WriteLine(counting+" \t| "+name+" \t| "+Surname+" \t| "+ idno + " \t|"+ depName);
                  
                 }
             }
-            Console.WriteLine("=================================" +
+            Console.WriteLine("\n=================================" +
                 "==================\n"+counting + " Rows Found" +
                 "\n=================================" +
                 "==================");
-            //close connection
+            
+
             con.Close();
-            //dispose of connection
             con.Dispose();
 
         }
@@ -62,8 +67,8 @@ namespace AccessLayer
             isBirthday, string positionName, string dep, SqlConnection con)
         {
            
-                //insert into department
-                string sql = "Insert Into Department(DepartmentName) values (@dep)";
+            //insert into department
+            string sql = "Insert Into Department(DepartmentName) values (@dep)";
             //create a sql command referencing the connection
             SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -121,9 +126,6 @@ namespace AccessLayer
             //create a sql command referencing the connection
             SqlCommand memCommand = new SqlCommand(memberSql, con);
 
-            /*
-             * tring fName, string lName, string ID, string parkNo, string isBirthday, string positionName, string dep, SqlConnection con
-             * */
             int result = 0;
 
             if (isBirthday.ToLower() == "yes")
@@ -141,15 +143,17 @@ namespace AccessLayer
             memCommand.Parameters.Add(new SqlParameter("@isBirthDay", result));
 
 
-            memCommand.ExecuteScalar();
+            memCommand.ExecuteNonQuery();
+            //memCommand.ExecuteScalar();
 
 
             //----------------------------------------------------------------------------
 
             //close connection
             con.Close();
-            Console.WriteLine(keyA+" "+keyB);
-            //readData(dep, con);
+            con.Dispose();
+            //readData(fName, con);
         }
+       
     }
 }

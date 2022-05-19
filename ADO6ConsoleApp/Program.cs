@@ -3,7 +3,7 @@ using AccessLayer;
 using System.Data.SqlClient;
 namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
 {
-    internal class Program : Access
+    internal class Program
     {
         static void Main(string[] args)
         {
@@ -12,52 +12,64 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             var con = new SqlConnection(connect);
             con.Open();
             //create query that writes to database
-            string search,dep, opt;
-            Console.WriteLine("Press The Following Options \n1: Read Data or 2: Insert Data");
+            string opt;
+            Console.WriteLine("Press The Following Options \n1: Search Data or 2: Insert Data");
             opt = Console.ReadLine();
 
             switch (Convert.ToInt32(opt))
             {
                 case 1:
-                    // code block
-                    Console.WriteLine("\nSearch by First Name, Surname or ID no# Or Press 1 for ALL Data");
-                    search = Console.ReadLine();
-                    readData(search, con);
+                    // function for reading values
+                    search(con);
                     break;
                 case 2:
-                    // code block
-                    Console.WriteLine("Enter FirstName");
-                    string fName = Console.ReadLine();
-
-                    Console.WriteLine("Enter Surname");
-                    string lName = Console.ReadLine();
-
-                    Console.WriteLine("Enter Full Name");
-                    string fullName = Console.ReadLine();
-
-                    Console.WriteLine("Enter your SA ID");
-                    string ID = Console.ReadLine();
-
-                    Console.WriteLine("Enter your Parking Spot No.");
-                    string parkNo = Console.ReadLine();
-
-                    Console.WriteLine("Do you celebrate Birthdays?");
-                    string isBirthday = Console.ReadLine();
-
-                    Console.WriteLine("Write down Name of the department");
-                    dep = Console.ReadLine();
-
-                    Console.WriteLine("Write down your Positon Name");
-                    string positionName = Console.ReadLine();
-
-                    insertData(fName, lName, fullName, ID, parkNo,isBirthday, positionName,dep , con);
+                    // function for entering values
+                    enterValues(con);
                     break;
                 default:
                     // code block
-                    Console.WriteLine("Again:  \nPress 1: Read Data or 2: Insert Data");
-                    opt = Console.ReadLine();
+                    Console.WriteLine("Default to Searching Data");
+                    search(con);
                     break;
             }
+        }
+
+        public static void search(SqlConnection con)
+        {
+            string search;
+            Console.WriteLine("Search by First Name, Surname or ID no#");
+            search = Console.ReadLine();
+            Access.readData(search, con);
+        }
+
+        public static void enterValues(SqlConnection con)
+        {
+                string dep, opt;
+                Console.WriteLine("Enter FirstName");
+                string fName = Console.ReadLine();
+
+                Console.WriteLine("Enter Surname");
+                string lName = Console.ReadLine();
+
+                string fullName = fName + " " + lName;
+
+                Console.WriteLine("Enter your SA ID");
+                string ID = Console.ReadLine();
+
+                Console.WriteLine("Enter your Parking Spot No.");
+                string parkNo = Console.ReadLine();
+
+                Console.WriteLine("Do you celebrate Birthdays?");
+                string isBirthday = Console.ReadLine();
+
+                Console.WriteLine("Write down Name of the department");
+                dep = Console.ReadLine();
+
+                Console.WriteLine("Write down your Positon Name");
+                string positionName = Console.ReadLine();
+
+                //@fName,@lName,@fullName,@identity,@parkNo,@depID,@posID,@isBirthDay
+                Access.insertData(fName, lName, fullName, ID, parkNo, isBirthday, positionName, dep, con);
         }
 
        
