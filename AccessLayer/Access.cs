@@ -3,66 +3,51 @@ namespace AccessLayer
 {
     public class Access
     {
-
+        //read data function
+        //====================================================================================================================
         public static void readData(string searching, SqlConnection con)
         {
             //create query that reads from database
-            string sql2 = "select * from Member "+
-                            "inner join Department On Member.DepartmentId = Department.Id "+
-                            "inner join Position on Member.PositionId = Position.Id " +
-                            "where FirstName like @search " +
-                            "OR Surname like @search " +
-                            "OR SAIdentityNo like @search ";
+            string sql2;
+            if (searching.ToLower() == "all")
+            {
+                sql2 = "select * from Member inner join Department On Member.DepartmentId = Department.Id " +
+                        "inner join Position on Member.PositionId = Position.Id";
+            }
+            else
+            {
+                sql2 = "select * from Member inner join Department On Member.DepartmentId = Department.Id " +
+                        "inner join Position on Member.PositionId = Position.Id where FirstName like @search " +
+                        "OR Surname like @search OR SAIdentityNo like @search ";
+            }
             //create a sql command referencing the connection
             var cmd2 = new SqlCommand(sql2, con);
-
 
             cmd2.Parameters.Add(new SqlParameter("@search", searching));
             //cmd2.CommandType = System.Data.CommandType.Text;
 
-
             //create sql data reader
             SqlDataReader dataReader = cmd2.ExecuteReader();
 
-            
-
-            int counting = 0;
-            
-            Console.WriteLine("\nNo. \t|Fist Name \t|Surname \t|SA ID# \t Department Name");
-            Console.WriteLine("===================================" +
-                "=======================================");
-            while (dataReader.Read())
-            {
-                
-                var id = dataReader["Id"];
-                var name = dataReader["FirstName"];
-                var Surname = dataReader["Surname"];
-                var idno = dataReader["SAIdentityNo"];
-                var depName = dataReader["DepartmentName"];
-
-                if (dataReader.FieldCount <= 0)
-                {
-                    Console.WriteLine("No Data Found ## ");
-                }
-                else
-                {
-                    counting++;
-                    
-                    Console.WriteLine(counting+" \t| "+name+" \t| "+Surname+" \t| "+ idno + " \t|"+ depName);
-                 
-                }
-            }
-            Console.WriteLine("\n=================================" +
-                "==================\n"+counting + " Rows Found" +
-                "\n=================================" +
-                "==================");
-            
+            //function
+            display(dataReader);
 
             con.Close();
             con.Dispose();
-
         }
+        //====================================================================================================================
+        //end of reading data function
 
+
+
+
+
+
+
+
+
+        //====================================================================================================================
+        //insert data function
         public static void insertData(string fName, string lName,string fullName, string ID, string parkNo, string
             isBirthday, string positionName, string dep, SqlConnection con)
         {
@@ -116,9 +101,7 @@ namespace AccessLayer
 
 
             //----------------------------------------------------------------------------
-
             //insert into member using keyA and keyB
-
             //fName, lName, ID, parkNo,isBirthday, positionName,dep , con
             string memberSql = "Insert Into Member(FirstName,Surname,FullName,SAIdentityNo," +
                 "ParkingSpotNo,DepartmentId,PositionId,CelebratesBirthday) " +
@@ -146,14 +129,65 @@ namespace AccessLayer
             memCommand.ExecuteNonQuery();
             //memCommand.ExecuteScalar();
 
-
             //----------------------------------------------------------------------------
-
             //close connection
             con.Close();
             con.Dispose();
-            //readData(fName, con);
+
+            Console.WriteLine("" +
+                "\n-------------------------------\n" +
+                "Successfully Inserted Data" +
+                "\n-------------------------------");
         }
-       
-    }
+        //====================================================================================================================
+        //end of inserting data function
+
+
+
+
+
+
+
+
+        //=====================================================================================================================
+        //Display function
+        public static void display(SqlDataReader dataReader)
+        {
+            int counting = 0;
+
+            Console.WriteLine("\nNo. \t|Fist Name \t|Surname \t|SA ID# \t Department Name");
+            Console.WriteLine("===================================" +
+                "=======================================");
+            while (dataReader.Read())
+            {
+
+                var id = dataReader["Id"];
+                var name = dataReader["FirstName"];
+                var Surname = dataReader["Surname"];
+                var idno = dataReader["SAIdentityNo"];
+                var depName = dataReader["DepartmentName"];
+
+                if (dataReader.FieldCount <= 0)
+                {
+                    Console.WriteLine("No Data Found ## ");
+                }
+                else
+                {
+                    counting++;
+
+                    Console.WriteLine(counting + " \t| " + name + " \t| " + Surname + " \t| " + idno + " \t|" + depName);
+
+                }
+            }
+            Console.WriteLine("\n=================================" +
+                "==================\n" + counting + " Rows Found" +
+                "\n=================================" +
+                "==================");
+        }
+        //end of display
+        //====================================================================================================================
+
+
+
+    }    
 }

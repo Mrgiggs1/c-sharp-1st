@@ -37,7 +37,7 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
         public static void search(SqlConnection con)
         {
             string search;
-            Console.WriteLine("Search by First Name, Surname or ID no#");
+            Console.WriteLine("Search by First Name, Surname, ID no# or All");
             search = Console.ReadLine();
             Access.readData(search, con);
         }
@@ -72,6 +72,7 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
                 Access.insertData(fName, lName, fullName, ID, parkNo, isBirthday, positionName, dep, con);
         }
 
+       
        
     }
 }
