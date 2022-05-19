@@ -12,7 +12,7 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             var con = new SqlConnection(connect);
             con.Open();
             //create query that writes to database
-            string dep,opt;
+            string search,dep, opt;
             Console.WriteLine("Press The Following Options \n1: Read Data or 2: Insert Data");
             opt = Console.ReadLine();
 
@@ -20,9 +20,9 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             {
                 case 1:
                     // code block
-                    Console.WriteLine("\nWhich Department you Looking for:");
-                    dep = Console.ReadLine();
-                    Access.readData(dep, con);
+                    Console.WriteLine("\nSearch by First Name, Surname or ID no#");
+                    search = Console.ReadLine();
+                    Access.readData(search, con);
                     break;
                 case 2:
                     // code block

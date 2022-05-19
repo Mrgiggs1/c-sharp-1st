@@ -4,15 +4,19 @@ namespace AccessLayer
     public class Access
     {
 
-        public static void readData(string opt, SqlConnection con)
+        public static void readData(string searching, SqlConnection con)
         {
             //create query that reads from database
-            string sql2 = "exec getDepId";
+            string sql2 = "select * " +
+                "from member " +
+                "where FirstName like @search " +
+                "OR Surname like @search " +
+                "OR SAIdentityNo like @search";
             //create a sql command referencing the connection
             var cmd2 = new SqlCommand(sql2, con);
 
 
-            //cmd2.Parameters.Add(new SqlParameter("@depN", opt));
+            cmd2.Parameters.Add(new SqlParameter("@search", searching));
             //cmd2.CommandType = System.Data.CommandType.Text;
 
 
@@ -27,6 +31,9 @@ namespace AccessLayer
             {
                 //store the columns in variables
                 var id = dataReader["Id"];
+                var name = dataReader["FirstName"];
+                var Surname = dataReader["Surname"];
+                var idno = dataReader["SAIdentityNo"];
 
                 if (dataReader.FieldCount <= 0)
                 {
@@ -35,8 +42,8 @@ namespace AccessLayer
                 else
                 {
                     counting++;
-                    Console.WriteLine("No. \t ID No. \t Department Name");
-                    Console.WriteLine(id);
+                    Console.WriteLine("No. \t Fist Name \t Surname \t SA ID#");
+                    Console.WriteLine(counting+" \t "+name+" \t "+Surname+" \t "+ idno);
                  
                 }
             }
@@ -55,8 +62,8 @@ namespace AccessLayer
             isBirthday, string positionName, string dep, SqlConnection con)
         {
            
-            //insert into department
-            string sql = "Insert Into Department(DepartmentName) values (@dep)";
+                //insert into department
+                string sql = "Insert Into Department(DepartmentName) values (@dep)";
             //create a sql command referencing the connection
             SqlCommand cmd = new SqlCommand(sql, con);
 
