@@ -11,7 +11,7 @@ namespace AccessLayer
                 "from member " +
                 "where FirstName like @search " +
                 "OR Surname like @search " +
-                "OR SAIdentityNo like @search";
+                "OR SAIdentityNo like @search ";
             //create a sql command referencing the connection
             var cmd2 = new SqlCommand(sql2, con);
 
@@ -27,6 +27,7 @@ namespace AccessLayer
 
             int counting = 0;
             //while its reading
+            Console.WriteLine("\nNo. \t|Fist Name \t |Surname \t| SA ID#");
             while (dataReader.Read())
             {
                 //store the columns in variables
@@ -41,9 +42,8 @@ namespace AccessLayer
                 }
                 else
                 {
-                    counting++;
-                    Console.WriteLine("No. \t Fist Name \t Surname \t SA ID#");
-                    Console.WriteLine(counting+" \t "+name+" \t "+Surname+" \t "+ idno);
+                    counting++;                    
+                    Console.WriteLine(counting+" \t| "+name+" \t|"+Surname+" \t| "+ idno);
                  
                 }
             }

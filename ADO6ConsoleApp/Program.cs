@@ -3,7 +3,7 @@ using AccessLayer;
 using System.Data.SqlClient;
 namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
 {
-    internal class Program
+    internal class Program : Access
     {
         static void Main(string[] args)
         {
@@ -20,9 +20,9 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             {
                 case 1:
                     // code block
-                    Console.WriteLine("\nSearch by First Name, Surname or ID no#");
+                    Console.WriteLine("\nSearch by First Name, Surname or ID no# Or Press 1 for ALL Data");
                     search = Console.ReadLine();
-                    Access.readData(search, con);
+                    readData(search, con);
                     break;
                 case 2:
                     // code block
@@ -50,7 +50,7 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
                     Console.WriteLine("Write down your Positon Name");
                     string positionName = Console.ReadLine();
 
-                    Access.insertData(fName, lName, fullName, ID, parkNo,isBirthday, positionName,dep , con);
+                    insertData(fName, lName, fullName, ID, parkNo,isBirthday, positionName,dep , con);
                     break;
                 default:
                     // code block
