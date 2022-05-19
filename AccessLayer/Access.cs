@@ -29,7 +29,7 @@ namespace AccessLayer
             //create sql data reader
             SqlDataReader dataReader = cmd2.ExecuteReader();
 
-            //function
+            // display function
             display(dataReader);
 
             con.Close();

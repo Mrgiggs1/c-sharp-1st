@@ -37,10 +37,11 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             }
             catch(Exception err)
             {
-                Console.WriteLine(err);
-                Console.WriteLine("-------------------\n" +
-                                    "Provide correct Data" +
-                                    "\n-------------------");
+                
+                Console.WriteLine("======================\n" +
+                                    "Provide correct Data");
+                Console.WriteLine("==========================================================\n"+err
+                    + "\n==========================================================");
             }
 
             
