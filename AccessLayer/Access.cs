@@ -155,11 +155,11 @@ namespace AccessLayer
         public static void deleteData(string del, SqlConnection con)
         {
             //insert into department
-            string sql = "delete from Member " +
-                        "inner join Department On Member.DepartmentId = Department.Id " +
-                        "inner join Position on Member.PositionId = Position.Id " +
-                        "where FirstName like @delete " +
-                        "OR Surname like @delete";
+            string sql = "delete from Member ";
+            //            "inner join Department On Member.DepartmentId = Department.Id " +
+            //            "inner join Position on Member.PositionId = Position.Id " +
+            //            "where FirstName like @delete " +
+            //            "OR Surname like @delete";
             //create a sql command referencing the connection
             SqlCommand cmd = new SqlCommand(sql, con);
 
