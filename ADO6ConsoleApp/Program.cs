@@ -13,7 +13,7 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             con.Open();
             //create query that writes to database
             string opt;
-            Console.WriteLine("Press The Following Options \n1: Search Data or 2: Insert Data");
+            Console.WriteLine("Press The Following Options \n1: Search Data,  2: Insert Data or 3 Delete Data");
             opt = Console.ReadLine();
 
             try
@@ -27,6 +27,9 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
                     case 2:
                         // function for entering values
                         enterValues(con);
+                        break;
+                    case 3:
+                        deleteValue(con);
                         break;
                     default:
                         // code block
@@ -55,6 +58,16 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             Console.WriteLine("Search by First Name, Surname, ID no# or All");
             search = Console.ReadLine();
             Access.readData(search, con);
+        }
+
+
+        //delete data value
+        public static void deleteValue(SqlConnection con)
+        {
+            string del;
+            Console.WriteLine("Delete by Surname or Firstname");
+            del = Console.ReadLine();
+            Access.deleteData(del, con);
         }
 
         //entering data values to insert 
