@@ -156,11 +156,6 @@ namespace AccessLayer
         {
             //insert into department
             string sql = "delete from Member";
-            //            "inner join Department On Member.DepartmentId = Department.Id " +
-            //            "inner join Position on Member.PositionId = Position.Id " +
-            //            "where FirstName like @delete " +
-            //            "OR Surname like @delete";
-            //create a sql command referencing the connection
             SqlCommand cmd = new SqlCommand(sql, con);
 
 
@@ -169,14 +164,23 @@ namespace AccessLayer
 
 
             cmd.ExecuteScalar();
-            Console.WriteLine(del+" Data is Deleted");
+            Console.WriteLine("" +
+                "\n-------------------------------\n" +
+                del + " Data is Deleted" +
+                "\n-------------------------------");
         }
         //====================================================================================================================
         //end of delete function
 
 
 
-
+        public static void updateData()
+        {
+            string sql = "UPDATE TABLE_A a " +
+                "JOIN TABLE_B b ON a.join_col = b.join_col AND a.column_a = b.column_b " +
+                "JOIN TABLE_C c ON[condition] " +
+                "SET a.column_c = a.column_c + 1";
+        }
 
 
         //=====================================================================================================================
