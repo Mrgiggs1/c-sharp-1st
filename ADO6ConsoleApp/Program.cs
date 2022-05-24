@@ -73,7 +73,7 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
         //entering data values to insert 
         public static void enterValues(SqlConnection con)
         {
-                string dep, opt;
+                string dep;
                 Console.WriteLine("Enter FirstName");
                 string fName = Console.ReadLine();
 
