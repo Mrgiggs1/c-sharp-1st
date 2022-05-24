@@ -13,7 +13,7 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             con.Open();
             //create query that writes to database
             string opt;
-            Console.WriteLine("Press The Following Options \n1: Search Data,  2: Insert Data or 3 Delete Data");
+            Console.WriteLine("Press The Following Options \n1: Search Data,  2: Insert Data,  3: Delete Data,   4: Update Data");
             opt = Console.ReadLine();
 
             try

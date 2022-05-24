@@ -62,110 +62,109 @@ namespace AccessLayer
                         try
                         {
                         //create a sql command referencing the connection
-                        using (SqlCommand cmd = new SqlCommand(sql, con))
-                        {
-
-                            cmd.Parameters.Add(new SqlParameter("@dep", dep));
-                            cmd.CommandType = System.Data
-                                .CommandType.Text;
-
-
-                            cmd.ExecuteScalar();
-
-                            //execute stored procedure for id save in keyA
-                            string link = "exec getDepId";
-                            SqlCommand cmd1 = new SqlCommand(link, con);
-                            var keyA = cmd1.ExecuteScalar();
-
-                            //set command type to stored procedure
-                            cmd1.CommandType = System.Data.CommandType.StoredProcedure;
-                            keyA = Int32.Parse(keyA.ToString());
-                            //----------------------------------------------------------------------------
-
-
-
-                            //----------------------------------------------------------------------------
-                            //insert into Position
-
-                            string sql2 = "Insert Into Position(Description) values (@pos)";
-                            //create a sql command referencing the connection
-                            SqlCommand posCommand = new SqlCommand(sql2, con);
-
-
-                            posCommand.Parameters.Add(new SqlParameter("@pos", positionName));
-                            posCommand.CommandType = System.Data
-                                .CommandType.Text;
-
-
-                            posCommand.ExecuteScalar();
-
-
-                            //execute stored procedure for id save in keyB
-                            string link2 = "exec getPositionId";
-                            SqlCommand cmd2 = new SqlCommand(link2, con);
-                            var keyB = cmd2.ExecuteScalar();
-                            cmd2.CommandType = System.Data.CommandType.StoredProcedure;
-                            keyB = Int32.Parse(keyB.ToString());
-                            //----------------------------------------------------------------------------
-
-
-
-
-                            //----------------------------------------------------------------------------
-                            //insert into member using keyA and keyB
-                            //fName, lName, ID, parkNo,isBirthday, positionName,dep , con
-                            string memberSql = "Insert Into Member(FirstName,Surname,FullName,SAIdentityNo," +
-                                "ParkingSpotNo,DepartmentId,PositionId,CelebratesBirthday) " +
-                                "values (@fName,@lName,@fullName,@identity,@parkNo,@depID,@posID,@isBirthDay)";
-                            //create a sql command referencing the connection
-                            SqlCommand memCommand = new SqlCommand(memberSql, con);
-
-                            int result = 0;
-
-                            if (isBirthday.ToLower() == "yes")
+                            using (SqlCommand cmd = new SqlCommand(sql, con))
                             {
-                                result = 1;
-                            }
 
-                            memCommand.Parameters.Add(new SqlParameter("@fName", fName));
-                            memCommand.Parameters.Add(new SqlParameter("@lName", lName));
-                            memCommand.Parameters.Add(new SqlParameter("@fullName", fullName));
-                            memCommand.Parameters.Add(new SqlParameter("@identity", ID));
-                            memCommand.Parameters.Add(new SqlParameter("@parkNo", Int32.Parse(parkNo)));
-                            memCommand.Parameters.Add(new SqlParameter("@depID", keyA));
-                            memCommand.Parameters.Add(new SqlParameter("@posID", keyB));
-                            memCommand.Parameters.Add(new SqlParameter("@isBirthDay", result));
+                                cmd.Parameters.Add(new SqlParameter("@dep", dep));
+                                cmd.CommandType = System.Data
+                                    .CommandType.Text;
 
 
-                            memCommand.ExecuteNonQuery();
-                            //memCommand.ExecuteScalar();
+                                cmd.ExecuteScalar();
 
-                            trans.Commit();
-                        }
+                                //execute stored procedure for id save in keyA
+                                string link = "exec getDepId";
+                                SqlCommand cmd1 = new SqlCommand(link, con);
+                                var keyA = cmd1.ExecuteScalar();
+
+                                //set command type to stored procedure
+                                cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+                                keyA = Int32.Parse(keyA.ToString());
+                                //----------------------------------------------------------------------------
 
 
 
-                    }
-                    catch (Exception err)
-                    {
-                        trans.Rollback();
-                        Console.WriteLine("" +
-                                    "\n-------------------------------\n" +
-                                    "Transaction RollBack " +
-                                    "\n'No Data inserted in all Tables involved'\n" +
-                                    "\n-------------------------------");
-                        Console.WriteLine(err);
-                    }
-            }
-                            //----------------------------------------------------------------------------
-                            //close connection
-                            con.Close();
-                            con.Dispose();
+                                //----------------------------------------------------------------------------
+                                //insert into Position
 
-                            Console.WriteLine("" +
+                                string sql2 = "Insert Into Position(Description) values (@pos)";
+                                //create a sql command referencing the connection
+                                SqlCommand posCommand = new SqlCommand(sql2, con);
+
+
+                                posCommand.Parameters.Add(new SqlParameter("@pos", positionName));
+                                posCommand.CommandType = System.Data
+                                    .CommandType.Text;
+
+
+                                posCommand.ExecuteScalar();
+
+
+                                //execute stored procedure for id save in keyB
+                                string link2 = "exec getPositionId";
+                                SqlCommand cmd2 = new SqlCommand(link2, con);
+                                var keyB = cmd2.ExecuteScalar();
+                                cmd2.CommandType = System.Data.CommandType.StoredProcedure;
+                                keyB = Int32.Parse(keyB.ToString());
+                                //----------------------------------------------------------------------------
+
+
+
+
+                                //----------------------------------------------------------------------------
+                                //insert into member using keyA and keyB
+                                //fName, lName, ID, parkNo,isBirthday, positionName,dep , con
+                                string memberSql = "Insert Into Member(FirstName,Surname,FullName,SAIdentityNo," +
+                                    "ParkingSpotNo,DepartmentId,PositionId,CelebratesBirthday) " +
+                                    "values (@fName,@lName,@fullName,@identity,@parkNo,@depID,@posID,@isBirthDay)";
+                                //create a sql command referencing the connection
+                                SqlCommand memCommand = new SqlCommand(memberSql, con);
+
+                                int result = 0;
+
+                                if (isBirthday.ToLower() == "yes")
+                                {
+                                    result = 1;
+                                }
+
+                                memCommand.Parameters.Add(new SqlParameter("@fName", fName));
+                                memCommand.Parameters.Add(new SqlParameter("@lName", lName));
+                                memCommand.Parameters.Add(new SqlParameter("@fullName", fullName));
+                                memCommand.Parameters.Add(new SqlParameter("@identity", ID));
+                                memCommand.Parameters.Add(new SqlParameter("@parkNo", Int32.Parse(parkNo)));
+                                memCommand.Parameters.Add(new SqlParameter("@depID", keyA));
+                                memCommand.Parameters.Add(new SqlParameter("@posID", keyB));
+                                memCommand.Parameters.Add(new SqlParameter("@isBirthDay", result));
+
+
+                                memCommand.ExecuteNonQuery();
+                                //memCommand.ExecuteScalar();
+
+                                trans.Commit();
+
+                                Console.WriteLine("" +
                                 "\n-------------------------------\n" +
                                 "Successfully Inserted Data" +
                                 "\n-------------------------------");
+                            }//end of 2nd using
+                        } //end of try
+                        catch (Exception err)
+                        {
+                            trans.Rollback();
+                            Console.WriteLine("" +
+                                        "\n-------------------------------\n" +
+                                        "Transaction RollBack " +
+                                        "\n'No Data inserted in all Tables involved'\n" +
+                                        "\n-------------------------------");
+                            Console.WriteLine(err);
+                        }
+                    }
+                            //----------------------------------------------------------------------------
+                            //close connection
+                            //con.Close();
+                            //con.Dispose();
+
+                    
            
         }
         //====================================================================================================================
