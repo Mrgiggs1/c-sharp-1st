@@ -32,7 +32,8 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
                         deleteValue(con);
                         break;
                     case 4:
-
+                        update(con);
+                        break;
                     default:
                         // code block
                         Console.WriteLine("Default to Searching Data");
@@ -104,12 +105,12 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
         }
 
 
-        public static void update()
+        public static void update(SqlConnection con)
         {
-            Console.WriteLine("What is it that you want to update!!");
-            string updatData = Console.ReadLine();
+            Console.WriteLine("Enter Name to update data @!!");
+            string name = Console.ReadLine();
 
-
+            Access.updateData(name,con);
 
         }
 

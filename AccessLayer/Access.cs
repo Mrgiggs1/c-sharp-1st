@@ -136,6 +136,7 @@ namespace AccessLayer
                 "\n-------------------------------\n" +
                 "Successfully Inserted Data" +
                 "\n-------------------------------");
+                readData(fName, con);
             }//end of 2nd using
         } 
                         //----------------------------------------------------------------------------
@@ -176,12 +177,30 @@ namespace AccessLayer
 
 
 
-        public static void updateData()
+        public static void updateData(string name, SqlConnection con)
         {
-            string sql = "UPDATE TABLE_A a " +
-                "JOIN TABLE_B b ON a.join_col = b.join_col AND a.column_a = b.column_b " +
-                "JOIN TABLE_C c ON[condition] " +
-                "SET a.column_c = a.column_c + 1";
+            string sql = "UPDATE Member " +
+                    "SET SAIdentityNo = @update" +
+                    " where FirstName like @select";
+
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            Console.WriteLine("Before Update!!");
+            
+            Console.WriteLine("Update your ID number @!!");
+            string val = Console.ReadLine();
+
+            cmd.Parameters.Add(new SqlParameter("@update", val));
+            cmd.Parameters.Add(new SqlParameter("@select", name));
+            cmd.CommandType = System.Data.CommandType.Text;
+
+
+            cmd.ExecuteScalar();
+            Console.WriteLine("" +
+                "\n-------------------------------\n" +
+                "Data is Updated" +
+                "\n-------------------------------");
+            readData(name, con);
         }
 
 
@@ -191,9 +210,10 @@ namespace AccessLayer
         {
             int counting = 0;
 
-            Console.WriteLine("\nNo. \t|Fist Name \t|Surname \t| South African ID \t|   Department Name  \t| Job Scription \t| Parking Spot ");
+            Console.WriteLine("\nNo. \t|Fist Name \t|Surname \t| South African ID \t|   Department \t| Job Descrip \t|Parking Spot ");
             Console.WriteLine("===================================" +
-                "==============================================================");
+                "=======================================" +
+                "=====================================");
             while (dataReader.Read())
             {
 
