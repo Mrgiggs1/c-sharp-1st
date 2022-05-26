@@ -31,6 +31,8 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
                     case 3:
                         deleteValue(con);
                         break;
+                    case 4:
+
                     default:
                         // code block
                         Console.WriteLine("Default to Searching Data");
@@ -99,6 +101,16 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
 
                 //access insert function
                 Access.insertData(fName, lName, fullName, ID, parkNo, isBirthday, positionName, dep, con);
+        }
+
+
+        public static void update()
+        {
+            Console.WriteLine("What is it that you want to update!!");
+            string updatData = Console.ReadLine();
+
+
+
         }
 
        
