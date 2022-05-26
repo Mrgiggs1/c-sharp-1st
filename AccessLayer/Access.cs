@@ -246,7 +246,28 @@ namespace AccessLayer
         //end of display
         //====================================================================================================================
 
+        //ID validation
+
+        //still to work on it
+        //public static string validateid(string id)
+        //{
+        //    string results = "";
+        //    if (int32.parse(id.substring(0, 1)) == 13)
+        //    {
+        //        if (int32.parse(id.substring(0, 1)) >= 00 && int32.parse(id.substring(0, 1)) <= 42)
+        //        {
+        //            results = "valid id";
+        //            return results;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return results = "you entered more or less number of id";
+        //    }
+
+        //    return results;
+        //}
 
 
-    }    
+    }
 }

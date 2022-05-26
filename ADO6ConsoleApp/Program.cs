@@ -100,8 +100,9 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
                 Console.WriteLine("Write down your Positon Name");
                 string positionName = Console.ReadLine();
 
-                //access insert function
+          
                 Access.insertData(fName, lName, fullName, ID, parkNo, isBirthday, positionName, dep, con);
+            
         }
 
 
