@@ -140,10 +140,6 @@ namespace AccessLayer
                 "\n-------------------------------\n" +
                 "Successfully Inserted Data" +
                 "\n-------------------------------");
-                Console.WriteLine("" +
-                "\n-------------------------------\n" +
-                "Successfully Inserted Data" +
-                "\n-------------------------------");
                 readData(fName, con);
             }//end of 2nd using
         } 
