@@ -136,10 +136,6 @@ namespace AccessLayer
                 "\n-------------------------------\n" +
                 "Successfully Inserted Data" +
                 "\n-------------------------------");
-                Console.WriteLine("" +
-                "\n-------------------------------\n" +
-                "Successfully Inserted Data" +
-                "\n-------------------------------");
                 readData(fName, con);
             }//end of 2nd using
         } 
@@ -188,8 +184,6 @@ namespace AccessLayer
                     " where FirstName like @select";
 
             SqlCommand cmd = new SqlCommand(sql, con);
-
-            Console.WriteLine("Before Update!!");
             
             Console.WriteLine("Update your ID number @!!");
             string val = Console.ReadLine();
@@ -250,28 +244,7 @@ namespace AccessLayer
         //end of display
         //====================================================================================================================
 
-        //ID validation
-
-        //still to work on it
-        //public static string validateid(string id)
-        //{
-        //    string results = "";
-        //    if (int32.parse(id.substring(0, 1)) == 13)
-        //    {
-        //        if (int32.parse(id.substring(0, 1)) >= 00 && int32.parse(id.substring(0, 1)) <= 42)
-        //        {
-        //            results = "valid id";
-        //            return results;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return results = "you entered more or less number of id";
-        //    }
-
-        //    return results;
-        //}
-
+       
 
     }
 }

@@ -108,10 +108,11 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
 
         public static void update(SqlConnection con)
         {
-            Console.WriteLine("Enter Name to update data @!!");
+            Console.WriteLine("Enter First Name to update data @!!");
             string name = Console.ReadLine();
 
             Access.updateData(name,con);
+
 
         }
 
