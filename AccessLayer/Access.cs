@@ -226,6 +226,9 @@ namespace AccessLayer
                 if (dataReader.FieldCount <= 0)
                 {
                     Console.WriteLine("No Data Found ## ");
+                    Console.WriteLine("No Data Found ## ");
+                    Console.WriteLine("No Data Found ## ");
+                    Console.WriteLine("No Data Found ## ");
                 }
                 else
                 {
