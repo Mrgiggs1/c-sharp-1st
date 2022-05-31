@@ -19,7 +19,6 @@ namespace AccessLayer
                 sql2 = "select * from Member inner join Department On Member.DepartmentId = Department.Id " +
                         "inner join Position on Member.PositionId = Position.Id where FirstName like @search " +
                         "OR Surname like @search OR SAIdentityNo like @search ";
-                sql = "";
             }
             //create a sql command referencing the connection
             var cmd2 = new SqlCommand(sql2, con);
