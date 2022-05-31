@@ -13,7 +13,6 @@ namespace AccessLayer
             {
                 sql2 = "select * from Member inner join Department On Member.DepartmentId = Department.Id " +
                         "inner join Position on Member.PositionId = Position.Id";
-                sql = "";
             }
             else
             {
