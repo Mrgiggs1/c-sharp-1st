@@ -13,7 +13,8 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
             con.Open();
             //create query that writes to database
             string opt;
-            Console.WriteLine("Press The Following Options \n1: Search Data,  2: Insert Data,  3: Delete Data,   4: Update Data");
+            Console.WriteLine("Press The Following Options \n1: Search Data,  2: Insert Data,  3: Delete Data,   4: Update Data" +
+                ", : Any Num to search all data");
             opt = Console.ReadLine();
 
             try
@@ -36,8 +37,8 @@ namespace AD06ConsoleApp // Note: actual namespace depends on the project name.
                         break;
                     default:
                         // code block
-                        Console.WriteLine("Default to Searching Data");
-                        search(con);
+                        Console.WriteLine("Default to Searching All Data");
+                        Access.readData("all", con);
                         break;
                 }
             }
