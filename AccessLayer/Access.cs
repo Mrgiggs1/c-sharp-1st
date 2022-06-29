@@ -3,6 +3,10 @@ namespace AccessLayer
 {
     public class Access
     {
+        Access()
+        {
+
+        }
         //read data function
         //====================================================================================================================
         public static void readData(string searching, SqlConnection con)
@@ -85,22 +89,22 @@ namespace AccessLayer
                 posCommand.ExecuteScalar();
 
                 //execute stored procedure for id save in keyA
-                //string link = "exec getDepId";
-                //SqlCommand cmd1 = new SqlCommand(link, con);
-                //var keyA = cmd1.ExecuteScalar();
-                ////set command type to stored procedure
+                string link = "exec getDepId";
+                SqlCommand cmd1 = new SqlCommand(link, con);
+                var keyA = cmd1.ExecuteScalar();
+                //set command type to stored procedure
                 //cmd1.CommandType = System.Data.CommandType.StoredProcedure;
                 //keyA = int.Parse(keyA.ToString());
-                var keyA = 1;
+                //var keyA = 1;
 
                 //----------------------------------------------------------------------------
                 //execute stored procedure for id save in keyB
-                //string link2 = "exec getPositionId";
-                //SqlCommand cmd2 = new SqlCommand(link2, con);
-                //var keyB = cmd2.ExecuteScalar();
+                string link2 = "exec getPositionId";
+                SqlCommand cmd2 = new SqlCommand(link2, con);
+                var keyB = cmd2.ExecuteScalar();
                 //cmd2.CommandType = System.Data.CommandType.StoredProcedure;
                 //keyB = int.Parse(keyB.ToString()); //KeyB is an object that's why we convert toString() to get its value
-                var keyB = 2;
+                //var keyB = 2;
                     //----------------------------------------------------------------------------
 
                     //----------------------------------------------------------------------------
