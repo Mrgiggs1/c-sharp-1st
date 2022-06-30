@@ -3,10 +3,7 @@ namespace AccessLayer
 {
     public class Access
     {
-        Access()
-        {
-
-        }
+       
         //read data function
         //====================================================================================================================
         public static void readData(string searching, SqlConnection con)
