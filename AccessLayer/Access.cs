@@ -233,8 +233,6 @@ namespace AccessLayer
                 {
                     Console.WriteLine("No Data Found ## ");
                     Console.WriteLine("No Data Found ## ");
-                    Console.WriteLine("No Data Found ## ");
-                    Console.WriteLine("No Data Found ## ");
                 }
                 else
                 {
